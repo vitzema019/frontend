@@ -1,0 +1,135 @@
+/* ==== ItemCard – dark theme ================================================= */
+
+.item-card {
+    background: linear-gradient(180deg, var(--panel), var(--elev));
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    padding: var(--gap-2);
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-1);
+    box-shadow: var(--shadow-1);
+    color: var(--text);
+    transition: border-color .15s ease, background .15s ease;
+}
+
+.item-card:hover {
+    border-color: var(--brand);
+}
+
+/* completed state */
+.item-card.is-done .title {
+    text-decoration: line-through;
+    opacity: .6;
+}
+
+.item-card.is-done .qty-badge {
+    opacity: .6;
+}
+
+/* layout */
+.row.top {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    gap: var(--gap-1);
+    align-items: center;
+}
+
+.check input {
+    width: 18px;
+    height: 18px;
+    accent-color: var(--brand);
+    cursor: pointer;
+}
+
+/* title + quantity */
+.title-wrap {
+    min-width: 0;
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
+
+.title {
+    min-width: 0;
+    font-weight: 600;
+    line-height: 1.25;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+    color: var(--text);
+}
+
+.qty-badge {
+    flex: 0 0 auto;
+    font-weight: 500;
+    font-size: .8rem;
+    padding: .15rem .45rem;
+    border-radius: 999px;
+    background: var(--elev);
+    border: 1px solid var(--border);
+    color: var(--muted);
+}
+
+/* actions */
+.actions {
+    display: flex;
+    gap: .25rem;
+}
+
+.actions .btn-ghost {
+    padding: .3rem .45rem;
+    border: 1px solid var(--border);
+    border-radius: .5rem;
+    background: var(--panel);
+    color: var(--muted);
+    transition: border-color .15s, background .15s;
+}
+
+.actions .btn-ghost:hover {
+    color: var(--text);
+    border-color: var(--brand);
+    background: var(--elev);
+}
+
+/* note */
+.note {
+    color: var(--muted);
+    background: var(--elev);
+    border: 1px dashed var(--border);
+    padding: .5rem .6rem;
+    border-radius: var(--radius);
+    font-size: .9rem;
+    word-break: break-word;
+}
+
+/* edit mode */
+.edit-form {
+    display: flex;
+    gap: .4rem;
+}
+
+.edit-form input {
+    flex: 1;
+    padding: .45rem .6rem;
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: var(--elev);
+    color: var(--text);
+}
+
+.btn-primary {
+    background: linear-gradient(180deg, var(--brand), #2563eb);
+    border: 1px solid #2563eb;
+    color: #fff;
+    border-radius: var(--radius);
+    padding: .4rem .6rem;
+}
+
+.btn-ghost {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+    border-radius: var(--radius);
+    padding: .4rem .6rem;
+}

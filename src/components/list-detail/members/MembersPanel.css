@@ -1,0 +1,22 @@
+.members {
+    display: grid;
+    gap: var(--gap-3);
+}
+
+.members-head h3 {
+    margin: 0 0 .25rem;
+}
+
+.invite {
+    display: grid;
+    grid-template-columns: 1fr auto;
+    gap: var(--gap-2);
+}
+
+.members-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    gap: .5rem;
+}

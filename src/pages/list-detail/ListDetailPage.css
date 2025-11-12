@@ -1,0 +1,21 @@
+.list-detail {
+    display: grid;
+    gap: var(--gap-4);
+}
+
+.content-layout {
+    display: grid;
+    gap: var(--gap-4);
+    grid-template-columns: 1fr 320px;
+}
+
+.items-section,
+.sidebar {
+    padding: var(--gap-3);
+}
+
+@media (max-width:1100px) {
+    .content-layout {
+        grid-template-columns: 1fr;
+    }
+}

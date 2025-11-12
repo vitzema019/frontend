@@ -1,0 +1,84 @@
+/* Floating + button (nahoře vpravo v sekci) */
+.add-item-btn {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    border: 1px solid var(--border);
+    background: linear-gradient(180deg, #3a7be9, #2b60c9);
+    color: #fff;
+    font-size: 1.4rem;
+    line-height: 1;
+    cursor: pointer;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: var(--shadow-1);
+    transition: transform .05s ease, box-shadow .15s ease, border-color .15s ease;
+}
+
+.add-item-btn:hover {
+    box-shadow: 0 0 0 .12rem rgba(77, 163, 255, .25);
+}
+
+.add-item-btn:active {
+    transform: translateY(1px);
+}
+
+/* Modal overlay */
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(0, 0, 0, .45);
+    backdrop-filter: blur(2px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+/* Dialog */
+.modal {
+    width: min(520px, calc(100% - 2rem));
+    padding: var(--gap-3);
+    border-radius: var(--radius);
+    color: var(--text);
+    background: linear-gradient(180deg, var(--panel), var(--elev));
+    border: 1px solid var(--border);
+    box-shadow: var(--shadow-2);
+}
+
+.modal h3 {
+    margin: 0 0 var(--gap-2);
+    text-align: center;
+    color: var(--text);
+}
+
+/* Form */
+.form {
+    display: flex;
+    flex-direction: column;
+    gap: var(--gap-2);
+}
+
+.field {
+    display: flex;
+    flex-direction: column;
+    gap: .35rem;
+}
+
+.field>span {
+    font-size: .85rem;
+    color: var(--muted);
+}
+
+.inline {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: var(--gap-2);
+}
+
+.actions {
+    display: flex;
+    gap: var(--gap-2);
+    justify-content: flex-end;
+}

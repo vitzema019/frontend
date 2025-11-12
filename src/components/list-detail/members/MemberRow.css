@@ -1,0 +1,22 @@
+.member-row {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: .6rem;
+    padding: .55rem .75rem;
+    border: 1px solid var(--border);
+    background: #10162a;
+    border-radius: .6rem;
+}
+
+.member-row .avatar {
+    width: 24px;
+    text-align: center;
+    opacity: .9;
+}
+
+.member-row .name {
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}

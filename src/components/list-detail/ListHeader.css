@@ -1,0 +1,25 @@
+.ld-header {
+    display: grid;
+    grid-template-columns: auto 1fr auto;
+    align-items: center;
+    gap: var(--gap-2);
+    padding: var(--gap-2);
+    border: 1px solid var(--border);
+    border-radius: var(--radius);
+    background: linear-gradient(180deg, #121829, #0f1424);
+    box-shadow: var(--shadow-1);
+}
+
+.ld-title {
+    font-size: 1.05rem;
+    letter-spacing: .2px;
+}
+
+.ld-actions {
+    display: flex;
+    gap: .4rem;
+}
+
+.back {
+    padding-inline: .6rem;
+}

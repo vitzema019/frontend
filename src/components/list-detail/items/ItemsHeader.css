@@ -1,0 +1,20 @@
+/* src/components/list-detail/items/ItemsHeader.css */
+.items-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin: 0 0 .75rem;
+    color: var(--text, #1f2937);
+}
+
+.items-header h2 {
+    margin: 0;
+    font-size: 1.1rem;
+    font-weight: 700;
+}
+
+.items-header .right-slot {
+    display: flex;
+    align-items: center;
+    gap: .5rem;
+}
