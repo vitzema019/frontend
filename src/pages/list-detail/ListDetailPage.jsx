@@ -1,6 +1,5 @@
-import { useParams, useNavigate } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { useState } from "react";
-import PropTypes from "prop-types";
 import { initialList } from "../../app/data/initialList";
 import { initialMembers } from "../../app/data/initialMembers";
 import { initialItems } from "../../app/data/initialItems";
@@ -10,7 +9,6 @@ import ItemsPanel from "../../components/list-detail/items/ItemsPanel";
 import "./ListDetailPage.css";
 
 export default function ListDetailPage() {
-    const { listId } = useParams(); // pro reálné napojení z listId načteš data
     const navigate = useNavigate();
 
     const [list, setList] = useState(initialList);
@@ -21,22 +19,31 @@ export default function ListDetailPage() {
     // --- List actions ---
     const onRename = (title) => setList((l) => ({ ...l, title }));
     const onArchive = (archived) => setList((l) => ({ ...l, archived }));
-    const onDelete = () => { /* tady by bylo API */ navigate("/lists"); };
+    const onDelete = () => {
+        // TODO: API call
+        navigate("/lists");
+    };
 
     // --- Members actions ---
     const onInvite = (userIdOrName) =>
-        setMembers((m) => [...m, { id: `U${Date.now()}`, name: userIdOrName, role: "member" }]);
+        setMembers((m) => [
+            ...m,
+            { id: `U${Date.now()}`, name: userIdOrName, role: "member" },
+        ]);
 
-    const onRemoveMember = (userId) => setMembers((m) => m.filter((x) => x.id !== userId));
+    const onRemoveMember = (userId) =>
+        setMembers((m) => m.filter((x) => x.id !== userId));
     const onLeave = () => onRemoveMember(loggedUserId);
 
     // --- Items actions ---
     // payload: { name: string, quantity?: number, unit?: string, note?: string }
+    const genId = () => (window.crypto?.randomUUID?.() ?? `I${Date.now()}`);
+
     const onAddItem = (payload) =>
         setItems((arr) => [
             ...arr,
             {
-                id: `I${Date.now()}`,
+                id: genId(),
                 name: (payload?.name || "").trim() || "New item",
                 quantity: Math.max(1, Number(payload?.quantity ?? 1)),
                 unit: (payload?.unit || "pcs").trim(),
@@ -46,10 +53,9 @@ export default function ListDetailPage() {
             },
         ]);
 
+    // payload může obsahovat name/quantity/unit/note/completed…
     const onUpdateItem = (itemId, payload) =>
-        setItems((arr) =>
-            arr.map((it) => (it.id === itemId ? { ...it, ...payload } : it))
-        );
+        setItems((arr) => arr.map((it) => (it.id === itemId ? { ...it, ...payload } : it)));
 
     const onToggleComplete = (itemId, completed) =>
         setItems((arr) => arr.map((it) => (it.id === itemId ? { ...it, completed } : it)));
@@ -95,7 +101,3 @@ export default function ListDetailPage() {
         </div>
     );
 }
-
-ListDetailPage.propTypes = {
-    // když se bude používat jako “pure component”, lze props doplnit sem
-};

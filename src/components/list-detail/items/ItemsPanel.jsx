@@ -1,7 +1,8 @@
+// src/components/list-detail/items/ItemsPanel.jsx
 import PropTypes from "prop-types";
 import ItemsHeader from "./ItemsHeader";
 import ItemsGrid from "./ItemsGrid";
-import AddItem from "./AddItem";
+import AddItem from "./AddItem"
 
 export default function ItemsPanel({
     items, onAddItem, onUpdateItem, onToggleComplete, onRemoveItem
@@ -11,11 +12,10 @@ export default function ItemsPanel({
             <ItemsHeader>
                 <AddItem onAddItem={onAddItem} />
             </ItemsHeader>
-
             <ItemsGrid
                 items={items}
                 onToggle={onToggleComplete}
-                onRename={(id, name) => onUpdateItem(id, { name })}
+                onEdit={(id, payload) => onUpdateItem(id, payload)}
                 onDelete={onRemoveItem}
             />
         </>

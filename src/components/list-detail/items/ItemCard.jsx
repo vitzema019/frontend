@@ -2,18 +2,10 @@
 import { useState } from "react";
 import PropTypes from "prop-types";
 import "./ItemCard.css";
+import EditItemModal from "./EditItemModal";
 
-export default function ItemCard({ item, onToggle, onRename, onDelete }) {
-    const [editing, setEditing] = useState(false);
-    const [name, setName] = useState(item.name);
-
-    const submitEdit = (e) => {
-        e.preventDefault();
-        const v = name.trim();
-        if (!v) return;
-        onRename(v);
-        setEditing(false);
-    };
+export default function ItemCard({ item, onToggle, onEdit, onDelete }) {
+    const [open, setOpen] = useState(false);
 
     return (
         <div className={`item-card ${item.completed ? "is-done" : ""}`}>
@@ -27,30 +19,25 @@ export default function ItemCard({ item, onToggle, onRename, onDelete }) {
                     />
                 </label>
 
-                {!editing ? (
-                    <div className="title-wrap" title={`${item.name} • ${item.quantity} ${item.unit}`}>
-                        <div className="title">{item.name}</div>
-                        <div className="qty-badge">{item.quantity} {item.unit}</div>
-                    </div>
-                ) : (
-                    <form onSubmit={submitEdit} className="edit-form">
-                        <input value={name} onChange={(e) => setName(e.target.value)} autoFocus />
-                        <button className="btn-primary" type="submit">Save</button>
-                        <button className="btn-ghost" type="button" onClick={() => { setEditing(false); setName(item.name); }}>
-                            Cancel
-                        </button>
-                    </form>
-                )}
+                <div className="title-wrap" title={`${item.name} • ${item.quantity} ${item.unit}`}>
+                    <div className="title">{item.name}</div>
+                    <div className="qty-badge">{item.quantity} {item.unit}</div>
+                </div>
 
-                {!editing && (
-                    <div className="actions">
-                        <button className="btn-ghost" onClick={() => setEditing(true)} title="Edit">✎</button>
-                        <button className="btn-ghost" onClick={onDelete} title="Delete">🗑</button>
-                    </div>
-                )}
+                <div className="actions">
+                    <button className="btn-ghost" onClick={() => setOpen(true)} title="Edit">✎</button>
+                    <button className="btn-ghost" onClick={onDelete} title="Delete">🗑</button>
+                </div>
             </div>
 
             {item.note && <div className="note" title={item.note}>{item.note}</div>}
+
+            <EditItemModal
+                open={open}
+                item={item}
+                onClose={() => setOpen(false)}
+                onSave={(payload) => onEdit(payload)}
+            />
         </div>
     );
 }
@@ -65,6 +52,6 @@ ItemCard.propTypes = {
         completed: PropTypes.bool,
     }).isRequired,
     onToggle: PropTypes.func.isRequired,
-    onRename: PropTypes.func.isRequired,
+    onEdit: PropTypes.func.isRequired,   // <-- místo onRename
     onDelete: PropTypes.func.isRequired,
 };
